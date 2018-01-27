@@ -36,7 +36,6 @@ if [ $(uname) == 'Darwin' ]; then
     ln -sf /usr/local/bin/gpg /usr/local/bin/gpg2
 
 elif grep -q Ubuntu /etc/issue; then
-    sudo apt-add-repository multiverse
     sudo apt-get -y update
     # figlet is for server-splash
     sudo apt-get -y install tmux vim git ssh language-pack-en figlet httpie ncdu tree wget htop gnupg2 curl zsh mosh
