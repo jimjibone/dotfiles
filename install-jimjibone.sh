@@ -1,0 +1,27 @@
+#!/bin/bash
+source ./install.sh
+
+
+# git+ssh for push access
+git remote rm origin
+git remote add origin git@github.com:jimjibone/dotfiles.git
+
+
+cat <<EOF >> ~/.gitconfig
+[user]
+	name = James Reuss
+	email = jamesreuss@gmail.com
+[github]
+	user = jimjibone
+EOF
+
+cat <<EOF > ~/.ssh/authorized_keys
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDXvNhu/eOVymaX4I8C42ycCDnMqmX9OLoDrBkTiuBhJlUEOjQs5s5uoD2q1bmF7uQAaWkXBuDkPdxUkmLt34jzlAAvvcIuteEAIEFfDWN6UDJ02VDa9eKGrM3n+bYdFRi4OkSlSRYBn9bprGNdwqkLOozjdIaDdotBoHRjehq4Z8cLA3LIKcmgkktOECmB2QI02tCF9EeNQPSyJJyFdBQubH0C8epduU+I6VINpmrOZTceiF0kgjlQ1Ha2VLCTjIc1S6Wy+d647Eoiunupphwh+9HD4Lwf9i1gccOUKn2CcnjHgXeYjm5e+WbwlL0HzE0vhRykmIwMDJuHzWjD+Q9N jimjibone@xeon
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCh6tr46WZReQpbYo8kv39j6+E6vwlCZk6To50vL0yqFdx1Aadw0EJaZlb46TQCps4ddR6/V20hYjcGmZB+8CXdt7EK/8H3SdCFoDWwoaEmdTfVi4ClgurM2RzZUAM3Sa0C/5dDPGdy11FLp4FyjPS+aIF/WC3574cg0uj7VO5MDgmBqmBN+qaLmlSs5rdRU1Xa230zQnxMNzR7fmsqBX1d07xbthysswK55JUafcrChX3vkacFx54a+YcMttwuK9WQkBOCaa05x2uEh/vpmlu8FtCpkJ2HdeMCvkT24daDQm3k/0E97FCZkJ6zvbf3A/ixMxy2rboQlya3bXGN1x4R jimjibone@oscar
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC1bNFXaVhe3e0UOHb28RBzaaRMkZMDXjsw92Kgj1aXjz056Tuz28tAAbIrCI4j6IeFgLRDuebqlPIn3G/Zb25IFU4uPxv9lmPVkUwkKnnvIp7IhAXkpJSjwyMsm1gOWw6/wbNyt4/YLaKMuOgJ6Zbo2LV7MYtiQlibiDBGIdEAPSjxtArBj2W6ClGWcQTgbCDvoYOi4QL0fyw25/WD4kthAgNWuerR8EUjORFVlUojKQ1tiXb2m3zcNVflXQtvTPIWIUF9ep5R3DBrIfONGI4OeSewlsNgvX5SqNmN8p1Z6KQUopygWPmca+bGm5xKqv20im3GeU5zKmJrUWNnhNVR jimjibone@alfred
+ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAIBYOV2qW7+l80AvUMctX8hSZNTx6LfaZzSGBbIklWv6SdDuDt9jV3rBliD7Wr1iEiPj33tHBVmg+jzLqIcd1iVjIgA+6e+iEhcv8AebYixgVlsodpdm9+rlGchbhh6eYUSV8JgHefHHfSGyBDQkESPTAQQpxSJbc5FA2km/xl3YKQ== jamesreuss@brick
+EOF
+
+#cat <<EOF > ~/.gnupg/gpg.conf
+#default-key .....
+#EOF

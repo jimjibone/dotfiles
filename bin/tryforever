@@ -1,0 +1,15 @@
+#!/bin/bash
+
+
+trap exit SIGINT
+
+if [ ! $1 ]; then
+	echo "Usage: $0 <command> <args...>"
+	echo "Keep trying command until it succeeds. Useful for trainternets."
+	exit 1
+fi
+
+while sleep 1; do
+	"$@" && exit 0
+	echo -e "\033[31m$1 command failed, trying again...\033[0m"
+done

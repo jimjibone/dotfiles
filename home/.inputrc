@@ -1,0 +1,63 @@
+# To see a code a key makes, try CTRL+V <key> to get a code. Then replace ^[ with \e:
+# ^[[3~ becomes "\e[3~": delete-char, for example. CTRL+V does not always work.
+
+# from the guys at lifehacker
+# http://lifehacker.com/supercharge-your-command-lines-history-search-with-fou-478683529
+"\e[A":history-search-backward
+"\e[B": history-search-forward
+set show-all-if-ambiguous on
+set completion-ignore-case on
+
+# fix home/end keys on some systems
+"\e[1~": beginning-of-line
+"\e[4~": end-of-line
+"\e[7~": beginning-of-line
+"\e[8~": end-of-line
+"\eOH": beginning-of-line
+"\eOF": end-of-line
+"\e[H": beginning-of-line
+"\e[F": end-of-line
+
+# fix delete key
+# http://superuser.com/questions/93153/inputrc-settings-delete-char-and-keybindings-not-working
+DEL: delete-char
+"\e[3~": delete-char
+
+# pageup (ok)
+"\e[5~": history-search-backward
+
+# pagedown (ok)
+"\e[6~": history-search-forward
+
+# do not make noise
+set bell-style none
+
+# ALT+right/left for emacs-style word skipping
+"\e[1;3C": forward-word
+"\e[1;3D": backward-word
+"\e[5C": forward-word
+"\e[5D": backward-word
+"\e\e[C": forward-word
+"\e\e[D": backward-word
+"\eOC": forward-word
+"\eOD": backward-word
+
+# no control characters on screen
+set echo-control-characters off
+
+# F12: fg
+# job control: pause/break is to background a job, make F12 restore it to the
+# foreground.
+"\e[24~":"\C-k \C-u fg\n"
+# \C-k \C-u = clear line
+# Find escape code in bash with CTRL+V <key>
+# Then replace ^[ with \e
+# You can also create a key binding that will execute something without
+# disturbing the current command line.  bind -x '"\eW":"who"'
+# http://stackoverflow.com/questions/4200800/in-bash-how-do-i-bind-a-function-key-to-a-command
+
+# Launch CTRLP vim plugin outside of vim, as I often do instinctively
+"\C-p":"\C-k \C-u vim -c CtrlP\n"
+
+# sudo-ize command
+"\C-s":"\C-asudo \C-e"
