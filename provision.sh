@@ -24,7 +24,7 @@ if [ $(uname) == 'Darwin' ]; then
 
     # recommended, uses /Applications now.
     brew tap caskroom/homebrew-cask
-    brew cask install google-chrome atom iterm2
+    brew cask install google-chrome atom iterm2 caskroom/versions/istat-menus5
 
     # upgrade or install (logic necessary)
     packages=(tmux vim git httpie ncdu tree bash wget task htop gnupg2 bash-completion figlet zsh mosh)
