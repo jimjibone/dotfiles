@@ -1,11 +1,10 @@
 #!/bin/bash
 source ./install.sh
 
-
 # git+ssh for push access
-git remote rm origin
-git remote add origin git@github.com:jimjibone/dotfiles.git
-
+#git remote rm origin
+#git remote add origin git@github.com:jimjibone/dotfiles.git
+git remote set-url --push origin git@github.com:jimjibone/dotfiles.git
 
 cat <<EOF >> ~/.gitconfig
 [user]
