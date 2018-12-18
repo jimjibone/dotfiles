@@ -12,6 +12,8 @@ cat <<EOF >> ~/.gitconfig
 	email = jamesreuss@gmail.com
 [github]
 	user = jimjibone
+[url "ssh://git@github.com"]
+	insteadof = https://github.com
 EOF
 
 cat <<EOF > ~/.ssh/authorized_keys
