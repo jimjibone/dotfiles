@@ -67,7 +67,7 @@ alias sudo="sudo "
 
 # ~/.gnupg config directories are incompatible (so why do they share the same
 # namespace???) so force-choose gpg2, which is faster due to AVX etc.
-alias gpg=gpg2
+# alias gpg=gpg2
 
 # A few more useful commands that don't need aliases. This file is a good
 # place.
