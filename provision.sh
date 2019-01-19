@@ -27,7 +27,7 @@ if [ $(uname) == 'Darwin' ]; then
     brew cask install google-chrome atom iterm2 caskroom/versions/istat-menus5
 
     # upgrade or install (logic necessary)
-    packages=(tmux vim git httpie ncdu tree bash wget task htop gnupg2 bash-completion figlet zsh mosh)
+    packages=(tmux vim git httpie ncdu tree bash wget task htop gnupg2 bash-completion figlet zsh mosh pinentry-mac)
     for package in "${packages[@]}"; do
         brew upgrade $package || brew install $package
     done
