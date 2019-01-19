@@ -12,9 +12,9 @@ cat <<EOF >> ~/.gitconfig
 	email = jamesreuss@gmail.com
 [github]
 	user = jimjibone
-[url "ssh://git@github.com"]
-	insteadof = https://github.com
 EOF
+#[url "ssh://git@github.com"]
+#	insteadof = https://github.com
 
 cat <<EOF > ~/.ssh/authorized_keys
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDXvNhu/eOVymaX4I8C42ycCDnMqmX9OLoDrBkTiuBhJlUEOjQs5s5uoD2q1bmF7uQAaWkXBuDkPdxUkmLt34jzlAAvvcIuteEAIEFfDWN6UDJ02VDa9eKGrM3n+bYdFRi4OkSlSRYBn9bprGNdwqkLOozjdIaDdotBoHRjehq4Z8cLA3LIKcmgkktOECmB2QI02tCF9EeNQPSyJJyFdBQubH0C8epduU+I6VINpmrOZTceiF0kgjlQ1Ha2VLCTjIc1S6Wy+d647Eoiunupphwh+9HD4Lwf9i1gccOUKn2CcnjHgXeYjm5e+WbwlL0HzE0vhRykmIwMDJuHzWjD+Q9N jimjibone@xeon
