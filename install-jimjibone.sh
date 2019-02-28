@@ -29,4 +29,4 @@ EOF
 #EOF
 
 # Change the default shell to zsh
-chsh -s $(which zsh)
+#chsh -s $(which zsh)
