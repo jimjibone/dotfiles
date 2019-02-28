@@ -27,3 +27,6 @@ EOF
 #cat <<EOF > ~/.gnupg/gpg.conf
 #default-key .....
 #EOF
+
+# Change the default shell to zsh
+chsh -s $(which zsh)
