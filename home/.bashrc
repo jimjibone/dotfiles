@@ -2,6 +2,7 @@
 [ -z "$PS1" ] && return
 
 export GOPATH=~/go
+export GOPRIVATE=github.com/jimjibone
 
 export PATH=~/bin:/usr/local/bin:/usr/local/sbin:/usr/local/share/npm/bin:$GOPATH/bin:/usr/local/go/bin:$PATH
 

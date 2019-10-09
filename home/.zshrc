@@ -5,6 +5,7 @@ unsetopt NOMATCH
 [ -z "$PS1" ] && return
 
 export GOPATH=~/go
+export GOPRIVATE=github.com/jimjibone
 
 typeset -U path
 path=(~/bin /usr/local/bin /usr/local/sbin /usr/local/share/npm/bin $GOPATH/bin /usr/local/go/bin $path)
