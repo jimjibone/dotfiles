@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+cd $(dirname $0)
 
 # display the splash
 if which figlet &>/dev/null; then

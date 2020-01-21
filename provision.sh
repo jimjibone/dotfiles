@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-# curl -sL https://github.com/jimjibone/dotfiles/raw/master/provision.sh | bash && bash
+cd $(dirname $0)
 
 cat <<EOF
 This script is intended to be run once. It will install packages then sync dotfiles.
