@@ -1,6 +1,9 @@
 dotfiles
 ========
 
+Painfully crafted configuration.
+
+
 Install
 -------
 
