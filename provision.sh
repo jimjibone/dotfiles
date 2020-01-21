@@ -1,58 +1,51 @@
 #!/bin/bash
 set -e
-set -x
 # curl -sL https://github.com/jimjibone/dotfiles/raw/master/provision.sh | bash && bash
 
 cat <<EOF
-This script is intended to be run once. It will install packages then sync
-dotfiles.
-
+This script is intended to be run once. It will install packages then sync dotfiles.
 Hit CTRL+C to abort in the next 3 seconds....
-
 EOF
 
 sleep 3
 
+PLATFORM=$(uname)
 
 if [ $(uname) == 'Darwin' ]; then
-    # macos
+    # macos -- get homebrew
     if [ ! -f /usr/local/bin/brew ]; then
+        echo "Installing homebrew"
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     else
+        echo "Updating homebrew"
         brew update
     fi
 
-    # recommended, uses /Applications now.
-    brew tap caskroom/homebrew-cask
-    brew cask install google-chrome atom iterm2 caskroom/versions/istat-menus5
+    # upgrade or install gui apps (logic necessary)
+    echo "Installing/upgrading brew casks"
+    packages=(visual-studio-code 1password contexts iterm2)
+    for package in "${packages[@]}"; do
+        brew cask upgrade $package || brew cask install $package
+    done
 
-    # upgrade or install (logic necessary)
-    packages=(tmux vim git httpie ncdu tree bash wget task htop gnupg2 bash-completion figlet zsh mosh pinentry-mac)
+    # upgrade or install cli things (logic necessary)
+    echo "Installing/upgrading brew packages"
+    packages=(golang mosh protobuf nodejs zsh-syntax-highlighting zsh-history-substring-search)
     for package in "${packages[@]}"; do
         brew upgrade $package || brew install $package
     done
 
-    # correct so alias works cross platform
-    ln -sf /usr/local/bin/gpg /usr/local/bin/gpg2
-
-elif grep -q Ubuntu /etc/issue; then
-    sudo apt-get -y update
-    # figlet is for server-splash
-    sudo apt-get -y install tmux vim git ssh language-pack-en figlet httpie ncdu tree wget htop gnupg2 curl zsh mosh
-    sudo ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
-elif grep -q Raspbian /etc/issue; then
-    sudo apt-get -y update
-    # Raspbian is British, locale is already correct. language-pack-en isn't a package.
-    # figlet is for server-splash
-    sudo apt-get -y install tmux vim git ssh figlet httpie ncdu tree wget htop gnupg2 zsh
-    sudo ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
+    # get zsh-git-prompt (with git)
+    if [ ! -d ~/.zsh/zsh-git-prompt ]; then
+        echo "Cloning zsh-git-prompt"
+        git clone git@github.com:olivierverdier/zsh-git-prompt.git ~/.zsh/zsh-git-prompt
+    else
+        echo "Updating zsh-git-prompt"
+        pushd ~/.zsh/zsh-git-prompt
+        git pull
+        popd
+    fi
 else
-    echo "Unsupported OS."
+    echo "Unsupported OS"
     exit 2
 fi
-
-cd ~
-git clone https://github.com/jimjibone/dotfiles.git
-
-cd dotfiles
-./install.sh
