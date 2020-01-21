@@ -1,0 +1,7 @@
+{
+    "go.useLanguageServer": true,
+    "editor.renderWhitespace": "boundary",
+    "files.insertFinalNewline": true,
+    "workbench.startupEditor": "newUntitledFile",
+    "git.showPushSuccessNotification": true
+}

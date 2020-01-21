@@ -27,3 +27,12 @@ test -f ~/.ssh/id_rsa.pub && chmod 644 ~/.ssh/id_rsa.pub
 # copy dotfiles separately, normal glob does not match
 cp -r home/.??* ~ 2> /dev/null
 cp -a bin ~
+
+# copy vscode settings
+# Windows %APPDATA%\Code\User\settings.json
+# macOS $HOME/Library/Application Support/Code/User/settings.json
+# Linux $HOME/.config/Code/User/settings.json
+if [ -d "~/Library/Application Support/Code/User/" ]; then
+    # macos
+    cp vscode/settings.json "~/Library/Application Support/Code/User/settings.json"
+fi

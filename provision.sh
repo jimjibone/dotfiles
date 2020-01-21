@@ -45,6 +45,14 @@ if [ $(uname) == 'Darwin' ]; then
         git pull
         popd
     fi
+
+    # get vscode extensions
+    # list installed extensions with: `code --list-extensions`
+    echo "Installing vscode extensions"
+    extensions=(ms-python.python ms-vscode.Go zxh404.vscode-proto3)
+    for extension in "${extensions[@]}"; do
+        code --install-extension $extension
+    done
 else
     echo "Unsupported OS"
     exit 2
