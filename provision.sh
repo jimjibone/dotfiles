@@ -49,7 +49,7 @@ if [ $(uname) == 'Darwin' ]; then
     # get vscode extensions
     # list installed extensions with: `code --list-extensions`
     echo "Installing vscode extensions"
-    extensions=(ms-python.python ms-vscode.Go zxh404.vscode-proto3)
+    extensions=(ms-python.python ms-vscode.Go zxh404.vscode-proto3 ms-vscode-remote.remote-ssh)
     for extension in "${extensions[@]}"; do
         code --install-extension $extension
     done
