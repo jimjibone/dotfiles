@@ -3,5 +3,5 @@
 	email = jamesreuss@gmail.com
 [github]
 	user = jimjibone
-[url "ssh://git@github.com"]
-	insteadOf = https://github.com
+[url "git@github.com:"]
+	insteadOf = https://github.com/

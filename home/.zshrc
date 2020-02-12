@@ -6,6 +6,7 @@ unsetopt NOMATCH
 
 export GOPATH=~/go
 export PATH=$GOPATH/bin:$PATH
+export GOPRIVATE=github.com/jimjibone/*
 
 HISTSIZE=9000
 SAVEHIST=9000
