@@ -30,7 +30,7 @@ if [ $(uname) == 'Darwin' ]; then
 
     # upgrade or install cli things (logic necessary)
     echo "Installing/upgrading brew packages"
-    packages=(golang mosh protobuf nodejs zsh-syntax-highlighting zsh-history-substring-search)
+    packages=(golang mosh protobuf nodejs zsh-syntax-highlighting zsh-history-substring-search schollz/tap/croc)
     for package in "${packages[@]}"; do
         brew upgrade $package || brew install $package
     done
