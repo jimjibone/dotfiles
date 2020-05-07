@@ -71,7 +71,7 @@ $ "
 # sudo-ize command
 bindkey -s '\C-s' "\C-asudo \C-e"
 
-if [[ "$(uname)" == 'Darwin' ]]; then
+if [ $(uname) == 'Darwin' ]; then
     # syntax highlighting
     # https://github.com/zsh-users/zsh-syntax-highlighting
     source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
