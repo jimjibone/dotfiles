@@ -23,7 +23,7 @@ if [ $(uname) == 'Darwin' ]; then
 
     # upgrade or install gui apps (logic necessary)
     echo "Installing/upgrading brew casks"
-    packages=(visual-studio-code 1password contexts iterm2)
+    packages=(visual-studio-code 1password contexts iterm2 firefox)
     for package in "${packages[@]}"; do
         brew cask upgrade $package || brew cask install $package
     done
