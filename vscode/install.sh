@@ -6,9 +6,15 @@ echo "Installing vscode settings"
 # Windows %APPDATA%\Code\User\settings.json
 # macOS $HOME/Library/Application Support/Code/User/settings.json
 # Linux $HOME/.config/Code/User/settings.json
-if [ -d "~/Library/Application Support/Code/User/" ]; then
+if [ -d "$HOME/Library/Application Support/Code/User/" ]; then
     # macos
-    cp settings.json "~/Library/Application Support/Code/User/settings.json"
+    cp settings.json "$HOME/Library/Application Support/Code/User/settings.json"
+elif [ -d "$HOME/.config/Code/User/" ]; then
+    # linux
+    cp settings.json "$HOME/.config/Code/User/settings.json"
+else
+    echo "ERROR: settings not installed"
+    exit 1
 fi
 
 # get vscode extensions
