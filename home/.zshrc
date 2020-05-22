@@ -1,92 +1,99 @@
-# pass * if globbing fails (etc)
-unsetopt NOMATCH
+source ~/.env.sh
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-export GOPATH=~/go
-export PATH=$GOPATH/bin:$PATH
-export GOPRIVATE=github.com/jimjibone/*
+source ~/.functions.sh
+source ~/.aliases
 
-HISTSIZE=9000
-SAVEHIST=9000
-# Change default as unconfigured bash could clobber history. Bash can run
-# unconfigured if CTRL+C is hit during initialisation.
-HISTFILE=~/.history
-setopt HIST_IGNORE_DUPS
-setopt HIST_IGNORE_SPACE
-unsetopt EXTENDED_HISTORY # just commands plskthx so bash_history is compatible
-#setopt INC_APPEND_HISTORY # immediate sharing of history
-
-# The ls alias
-if [[ "$(uname)" == 'Darwin' ]]; then
-    export CLICOLOR=1
-    export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
-else
-    alias ls='ls --color=auto' # does not work on macos
-fi
-
-# Aliases
-alias s='git status'
-alias d='git diff'
-alias la='ls -al'
-
-# cd then ls
-function cd {
-	builtin cd "$@" && ls
-}
-
-# Prompt functions.
-function __exit_warn {
-    # test status of last command without affecting it
-    stat=$?
-    test $stat -ne 0 && printf "\n\33[31mExited with status %s\33[m" $stat
-}
+SAVEHIST=$HISTSIZE
+unsetopt EXTENDED_HISTORY # just a list of commands so bash_history is compatible
+setopt INC_APPEND_HISTORY # immediate sharing of history
+# pass * if globbing fails (etc)
+unsetopt NOMATCH
+# auto rehash to discover execs in path
+setopt nohashdirs
+# with arrow keys
+zstyle ':completion:*' menu select
+setopt completealiases
 setopt PROMPT_SUBST
 autoload -U colors && colors
+# note HISTORY_IGNORE is no longer defined -- see cleanup-history for the replacement mechanism
+
+# zsh will use vi bindings if you have vim as the editor. I want emacs.
+# zsh does not use gnu readline, but zle
+bindkey -e
+
+# Completion
+autoload -U compinit && compinit
+source ~/.zsh/.dstask-zsh-completions.sh
+compdef d=git
 
 # zsh-git-prompt
+# https://github.com/olivierverdier/zsh-git-prompt
 ZSH_THEME_GIT_PROMPT_CACHE=1
 source ~/.zsh/zsh-git-prompt/zshrc.sh
 
-# Sometimes not set or fully qualified; simple name preferred.
-export HOSTNAME=$(hostname -s)
+# syntax highlighting
+# https://github.com/zsh-users/zsh-syntax-highlighting
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# Set colour from hostname
-export SYSTEM_COLOUR=$(~/bin/system-colour.py $HOSTNAME)
-[ $TMUX ] && tmux set -g status-left-bg colour${SYSTEM_COLOUR} &>/dev/null
+# history search by substring - must be loaded after syntax highlighting
+# https://github.com/zsh-users/zsh-history-substring-search
+source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
 
-# If user is root, use red to indicate danger.
-if [ $USER == root ]; then
-    PROMPT_COLOUR=160 # red
-else
-    PROMPT_COLOUR=$SYSTEM_COLOUR
-fi
+# case insensitive completion
+# http://stackoverflow.com/questions/24226685/have-zsh-return-case-insensitive-auto-complete-matches-but-prefer-exact-matches
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
-# Define the prompt
 PROMPT="\$(__exit_warn)
-%F{${PROMPT_COLOUR}}%n@%M:\$PWD%f \$(git_super_status)%F{239} \$(date +%T)%f
+%F{36}\$CMD_TIMER_PROMPT%f%F{${PROMPT_COLOUR}}%n@%M:\$PWD%f%F{243}\$(__git_prompt)\$(__p4_prompt)%f
 $ "
+
+# if you call a different shell, this does not happen automatically. WTF?
+export SHELL=$(which zsh)
+
+# before prompt (which is after command)
+function precmd() {
+	# reload history to get immediate update because my computer is fast, yo.
+	fc -R
+
+    # reset the terminal, in case something (such as cat-ing a binary file or
+    # failed SSH) sets a strange mode
+    stty sane
+    _cmd_timer_end
+}
+
+# just before cmd is executed
+function preexec() {
+    # should be first, others may change env
+    # _tmux_update_env
+    # _update_agents
+    _cmd_timer_start
+}
 
 # sudo-ize command
 bindkey -s '\C-s' "\C-asudo \C-e"
 
-if [ $(uname) == 'Darwin' ]; then
-    # syntax highlighting
-    # https://github.com/zsh-users/zsh-syntax-highlighting
-    source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-    # history search by substring - must be loaded after syntax highlighting
-    # https://github.com/zsh-users/zsh-history-substring-search
-    source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
-    
-    # bind UP and DOWN arrow keys
-    bindkey "$terminfo[kcuu1]" history-substring-search-up
-    bindkey "$terminfo[kcud1]" history-substring-search-down
-    # both methods are necessary
-    bindkey '^[[A' history-substring-search-up
-    bindkey '^[[B' history-substring-search-down
+# bind UP and DOWN arrow keys
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
+# https://github.com/zsh-users/zsh-history-substring-search
+# both methods are necessary
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 
-    # case insensitive completion
-    # http://stackoverflow.com/questions/24226685/have-zsh-return-case-insensitive-auto-complete-matches-but-prefer-exact-matches
-    zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+_disable_flow_control
+
+~/.bin/cleanup-history.py ~/.history
+fc -R # reload history
+
+# _tmux_window_name_read
+
+if [ $(uname) == 'Darwin' ]; then
+    eval `keychain --quiet --eval --agents ssh --inherit any id_rsa`
+elif grep -q Ubuntu /etc/issue; then
+    eval `keychain --quiet --eval --agents ssh id_rsa`
 fi
+
+trap "~/.bin/cleanup-history.py ~/.history" EXIT

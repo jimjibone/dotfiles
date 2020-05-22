@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 from __future__ import division
 from hashlib import md5
 from sys import argv
@@ -10,7 +10,7 @@ x256_colours = [2,3,5,6,7,8,10,11,12,13,14,34,37,40,43,46,49,76,78,80,82,84,86,1
 
 def deterministic_x256(*args):
     '''Produces a weighted deterministic colour'''
-    seed = unicode(args)
+    seed = str(args).encode()
 
     m = md5()
     m.update(seed)
@@ -21,7 +21,7 @@ def deterministic_x256(*args):
     return x256_colours[index]
 
 
-def wrap(string,colour):
+def wrap(string, colour):
     return '\033[38;5;%sm%s\033[0m' % (colour,string)
 
 
@@ -32,6 +32,6 @@ def colourise(string):
 
 if len(argv) <= 1:
     for c in x256_colours:
-        print wrap(c,c)
+        print(wrap(c, c))
 else:
-    print deterministic_x256(*argv[1:])
+    print(deterministic_x256(*argv[1:]))

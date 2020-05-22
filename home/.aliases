@@ -1,0 +1,27 @@
+# human readable timestamps
+alias dmesg='dmesg -T'
+# Moar ANSI colours, raw mode
+alias less='less -R'
+# list all
+alias la='ls -al'
+# don't use URL to create filename (do I really want a file called
+# unetbootin-source-494.tar.gz?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Funetbootin%2Ffiles%2FUNetbootin%2F494%2F&ts=1391695063&use_mirror=heanet?)
+alias wget='wget --content-disposition'
+
+# COMMON SHORTCUTS
+alias s='git status'
+alias d='git diff --color'
+alias task="dstask"
+
+# MISC FIXES
+# make bash/zsh aliases work with sudo
+# http://superuser.com/questions/441556/bash-alias-doesnt-carry-over-with-sudo
+alias sudo="sudo "
+
+# The ls alias
+if [[ "$(uname)" == 'Darwin' ]]; then
+    export CLICOLOR=1
+    export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
+else
+    alias ls='ls --color=auto' # does not work on macos
+fi

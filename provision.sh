@@ -1,51 +1,24 @@
 #!/bin/bash
-set -e
-cd $(dirname $0)
 
-cat <<EOF
-This script is intended to be run once. It will install packages then sync dotfiles.
-Hit CTRL+C to abort in the next 3 seconds....
-EOF
+# This script should be run as the target user. It uses sudo where appropriate.
 
-sleep 3
-
-PLATFORM=$(uname)
+# exit on error
+set -Eeo pipefail
 
 if [ $(uname) == 'Darwin' ]; then
-    # macos -- get homebrew
-    if [ ! -f /usr/local/bin/brew ]; then
-        echo "Installing homebrew"
-        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    else
-        echo "Updating homebrew"
-        brew update
-    fi
-
-    # upgrade or install gui apps (logic necessary)
-    echo "Installing/upgrading brew casks"
-    packages=(visual-studio-code 1password contexts iterm2 firefox)
-    for package in "${packages[@]}"; do
-        brew cask upgrade $package || brew cask install $package
-    done
-
-    # upgrade or install cli things (logic necessary)
-    echo "Installing/upgrading brew packages"
-    packages=(golang mosh protobuf nodejs zsh-syntax-highlighting zsh-history-substring-search schollz/tap/croc)
-    for package in "${packages[@]}"; do
-        brew upgrade $package || brew install $package
-    done
-
-    # get zsh-git-prompt (with git)
-    if [ ! -d ~/.zsh/zsh-git-prompt ]; then
-        echo "Cloning zsh-git-prompt"
-        git clone git@github.com:olivierverdier/zsh-git-prompt.git ~/.zsh/zsh-git-prompt
-    else
-        echo "Updating zsh-git-prompt"
-        pushd ~/.zsh/zsh-git-prompt
-        git pull
-        popd
-    fi
+    source provision/platforms/all.sh
+    source provision/platforms/macos.sh
+elif grep -q Ubuntu /etc/issue; then
+    source provision/sudoise.sh
+    source provision/platforms/all.sh
+    source provision/platforms/ubuntu.sh
 else
-    echo "Unsupported OS"
+    echo "Unsupported Platform"
     exit 2
 fi
+
+# display the splash
+if which figlet &>/dev/null; then
+	figlet -f slant dotfiles
+fi
+echo "Provision Complete"
