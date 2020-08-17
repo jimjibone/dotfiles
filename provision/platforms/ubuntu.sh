@@ -1,5 +1,3 @@
 #!/bin/bash
-
-# ubuntu -- use apt
 sudo apt-get -y update
-sudo apt-get -y install zsh mosh figlet keychain docker.io
+sudo apt-get -y install git vim zsh mosh tmux figlet keychain docker.io

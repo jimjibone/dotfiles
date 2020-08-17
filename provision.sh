@@ -12,6 +12,10 @@ elif grep -q Ubuntu /etc/issue; then
     source provision/sudoise.sh
     source provision/platforms/all.sh
     source provision/platforms/ubuntu.sh
+elif grep -q Raspbian /etc/issue; then
+    source provision/sudoise.sh
+    source provision/platforms/all.sh
+    source provision/platforms/raspbian.sh
 else
     echo "Unsupported Platform"
     exit 2
