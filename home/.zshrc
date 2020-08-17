@@ -92,7 +92,7 @@ fc -R # reload history
 
 if [ $(uname) == 'Darwin' ]; then
     eval `keychain --quiet --eval --agents ssh --inherit any id_rsa`
-elif grep -q Ubuntu /etc/issue; then
+elif grep -q -E 'Ubuntu|Raspbian' /etc/issue; then
     eval `keychain --quiet --eval --agents ssh id_rsa`
 fi
 
