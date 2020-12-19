@@ -1,70 +1,27 @@
-# My workflow
+dotfiles
+========
 
-General:
-
-* `vim` : text editor
-* `bash/zsh/fish` : Shells, used interchangeably depending on platform. Fish
-generates completions from man pages! (but CTRL+R reverse-i-search isn't there
-so I don't use it)
-* `tmux` : Terminal multiplexer
-* `git` : version control
-* `ack` : grep alternative for rebasing and source code exploration
-* `ssh` : secure remote shell (obvious I know)
-* `gnupg2`: OpenPGP cryptographic suite
-
-Specific:
-
-* `ipython` : interactive python shell
-* `ansible` : idempotent, agentless configuration management
-* `httpie` : curl alternative with better UX
-* `jq` : Command line JSON processor (good with httpie)
-* `ncdu` : hunt for disk usage
-* `brew` : homebrew package manager for OS X
-* `brew cask` : cask bundle manager for OS X
-* `pudb` : python debugger
-* `task` taskwarrior TODO list manager
+Painfully crafted configuration.
 
 
-Misc:
+Install
+-------
 
-`sox`,`ffmpeg`
-
-Recommended font: https://github.com/adobe-fonts/source-code-pro
-
-# Shell
-
-* `tm` will start or attach to the first `tmux` session. If you're on the only
-  shell, `tmux` session 0 will automatically attach.
-* `CTRL+p` will launch `vim` in find mode, also works inside vim
-* `CTRL+s` will prepend `sudo` to the prompt and move the cursor to the end of the prompt
-* `tryforever <cmd...>` will run a command in a loop until it fails
-* history is synchronised between open shells
-
-See `home/.aliases` and `bin/` for some useful shortcuts.
+1. Clone it -- one of:
+    - `git clone https://github.com/jimjibone/dotfiles.git ~/dotfiles`
+    - `git clone git@github.com:jimjibone/dotfiles.git ~/dotfiles`
+2. Provision your machine: `~/dotfiles/provision.sh` (installs missing tools and upgrades)
+3. Install it: `~/dotfiles/install.sh`
+4. Switch your main shell to zsh: `chsh -s $(which zsh)`
+5. Switch to zsh now: `zsh`
+6. Or, source it: `source ~/.zshrc`
 
 
-![Screenshot](etc/screenshot.png "Why do all terminal screenshots show top or htop running?")
+Fresh Install
+-------------
 
-As a bonus, the prompt/hostname colour changes with the hostname so it's easier
-to differentiate between hosts.
+## Debian (Buster)
 
-
-[2]: http://unix.stackexchange.com/questions/12107/how-to-unfreeze-after-accidentally-pressing-ctrl-s-in-a-terminal
-[3]: https://github.com/fish-shell/fish-shell/issues/814
-[4]: http://superuser.com/questions/413351/weird-insertion-from-vim-on-mouse-click
-[5]: https://github.com/unphased/putty-X
-
-# One liners
-
-Obviously inspect the script to see what it does before you run it. Note that it
-will clobber your settings files.
-
-```bash
-curl -sL https://github.com/jimjibone/dotfiles/raw/master/provision.sh | bash && bash
-```
-
-Ubuntu 17.04 does not have curl by default.
-
-```bash
-wget -O - https://github.com/jimjibone/dotfiles/raw/master/provision.sh | bash && bash
-```
+1. Generate keys: `ssh-keygen -b 4096 -C "$(whoami)@$(hostname -s)"`
+2. Get git: `sudo apt update && sudo apt install git`
+3. Complete the install guide above

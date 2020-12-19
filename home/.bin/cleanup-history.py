@@ -1,0 +1,126 @@
+#!/usr/bin/env python3
+"""
+Edits history to deduplicate, leaving the last occurrence of each command.
+Filters useless entries. Also normalises whitespace.
+
+To install, add this to .bashrc:
+
+    trap "~/.local/bin/cleanup-history ~/.bash_history" EXIT
+
+Advantages:
+ * History only cleaned on shell exit, meaning history isn't immediately lost which can be annoying sometimes
+ * De-duplication is global rather than sequential items only
+ * More-powerful regexes can be used
+ * Whitespace is normalised
+ * Can be used with bash and zsh at the same time with coherent behavior
+
+"""
+from sys import argv
+import re
+import tempfile
+from os import path
+from os import rename
+from sys import exit
+
+history_file = argv[1]
+
+# new environments won't have the history file yet, it's not a problem
+if not path.isfile(history_file):
+    exit(0)
+
+# regexes to ignore
+# an alternative to histignore. Processing here means the history will persist
+# until the next session ends, which is handy for correcting otherwise ignored
+# commands. Also it applies to zsh and bash at the same time.
+ignore = [
+    # short things
+    r"^.{1,3}$",
+    # changing into relative directories
+    "^cd [^\~/]",
+    # dstask operations (+ alias)
+    r"^(n|t|task|dstask) ",
+    r"^n ",
+    r"^week",
+    r"^day",
+    # yubikey OTP in case it's not disabled or removed
+    r"^cccccc",
+    r"^ls",
+    # annoying if accidentally re-executed at a later date
+    r"^git.+--amend",
+    r"reboot",
+    r"halt",
+    # mouse esc codes
+    r"^0",
+    # commands explicitly hidden by user
+    r"^ ",
+    # frequent typos (see .aliases)
+    r"^git psuh",
+    r"^cim ",
+    r"^sl ",
+    r"^c ",
+    r"^xs ",
+    r"^cim ",
+    r"^bim ",
+    r"^nom ",
+    r"^gi ",
+    r"^cd.. ",
+    r"^car ",
+    # deprecations
+    r"^findack ",
+    r"^ack ",
+    # Sensitive looking lines (export AWS_SECRET_ACCESS KEY, for example. I never do that. Ever. I promise.)
+    r"(api|token|key|secret|pass)",
+]
+
+# commands that match these patterns will never be excluded regardless of other rules
+exceptions = [
+    # context switching in dstask
+    r'^(n|t|task|dstask) context',
+    # password retrieval to clipboard
+    r'^pass -c',
+    r'--vault-password-file',
+    # I have likely used pass to lookup secrets, so none on cmd line, probably
+    r'=\$\(pass',
+]
+
+compiled_ignore = [re.compile(i, re.IGNORECASE) for i in ignore]
+compiled_exceptions = [re.compile(i, re.IGNORECASE) for i in exceptions]
+
+
+def is_valid(line):
+    for pattern in compiled_exceptions:
+        if pattern.search(line):
+            return True
+
+    for pattern in compiled_ignore:
+        if pattern.search(line):
+            return False
+
+    return True
+
+
+with open(history_file, "rb") as f:
+    # strip lines and remove non utf-8 chars
+    lines = [line.decode("utf-8", "ignore").strip() for line in f]
+
+
+seen = set()
+new_lines = list()
+
+# note that reversed() does not copy lines, just results in reversed iteration
+for line in reversed(lines):
+    line = " ".join(line.split())  # remove multiple whitespace
+    if is_valid(line) and line not in seen:
+        new_lines.append(line)
+        seen.add(line)
+
+new_lines.reverse()
+
+with tempfile.NamedTemporaryFile(mode="wb", dir=path.dirname(history_file), delete=False) as f:
+    for line in new_lines:
+        f.write((line + "\n").encode("utf-8"))
+
+    tmpfname = f.name
+
+# save atomically
+rename(tmpfname, history_file)

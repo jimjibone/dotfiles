@@ -1,7 +1,0 @@
-#!/bin/bash
-set -e
-
-git checkout master
-git fetch --all
-git merge --ff-only FETCH_HEAD
-git submodule update --init
