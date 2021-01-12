@@ -21,6 +21,9 @@ else
     exit 2
 fi
 
+echo
+echo "Switch to zsh with: chsh -s \$(which zsh)"
+
 # display the splash
 if which figlet &>/dev/null; then
 	figlet -f slant dotfiles

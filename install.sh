@@ -20,7 +20,7 @@ test -f ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
 test -f ~/.ssh/id_rsa.pub && chmod 644 ~/.ssh/id_rsa.pub
 
 # echo "Add ssh key to your keychain with: ssh-add -K ~/.ssh/id_rsa"
-# echo "Switch to zsh with: chsh -s \$(which zsh)"
+echo "Switch to zsh with: chsh -s \$(which zsh)"
 
 # copy dotfiles separately, normal glob does not match
 cp -r home/.??* ~ 2> /dev/null
