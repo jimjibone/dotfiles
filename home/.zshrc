@@ -9,6 +9,7 @@ source ~/.aliases
 SAVEHIST=$HISTSIZE
 unsetopt EXTENDED_HISTORY # just a list of commands so bash_history is compatible
 setopt INC_APPEND_HISTORY # immediate sharing of history
+setopt histignorealldups # remove duplicates from history in memory
 # pass * if globbing fails (etc)
 unsetopt NOMATCH
 # auto rehash to discover execs in path
