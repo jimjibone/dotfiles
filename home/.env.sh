@@ -1,8 +1,7 @@
 # common static env here
 export HOME=~
-export GOROOT=/usr/local/go
 export GOPATH=$HOME/go
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+export PATH=$PATH:$GOPATH/bin
 export GOPRIVATE=github.com/jimjibone/*
 # export EDITOR=vim-wrapper
 export PAGER="less -R"
