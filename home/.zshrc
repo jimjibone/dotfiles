@@ -9,7 +9,7 @@ source ~/.aliases
 SAVEHIST=$HISTSIZE
 unsetopt EXTENDED_HISTORY # just a list of commands so bash_history is compatible
 setopt INC_APPEND_HISTORY # immediate sharing of history
-setopt histignorealldups # remove duplicates from history in memory
+setopt histignorealldups # removal of duplicate command history in memory -- see cleanup-history for history file de-dup
 # pass * if globbing fails (etc)
 unsetopt NOMATCH
 # auto rehash to discover execs in path
@@ -19,7 +19,6 @@ zstyle ':completion:*' menu select
 setopt completealiases
 setopt PROMPT_SUBST
 autoload -U colors && colors
-# note HISTORY_IGNORE is no longer defined -- see cleanup-history for the replacement mechanism
 
 # zsh will use vi bindings if you have vim as the editor. I want emacs.
 # zsh does not use gnu readline, but zle
