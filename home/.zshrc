@@ -26,7 +26,8 @@ bindkey -e
 
 # Completion
 autoload -U compinit && compinit
-source ~/.zsh/.dstask-zsh-completions.sh
+source ~/.zsh/dstask-zsh-completions.sh
+source ~/.zsh/woodhouse-zsh-completions.sh
 compdef d=git
 
 # zsh-git-prompt
