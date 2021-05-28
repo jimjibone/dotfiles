@@ -1,9 +1,9 @@
 # common static env here
 export HOME=~
 export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
+export PATH=$HOME/.bin:$GOPATH/bin:$PATH
 export GOPRIVATE=github.com/jimjibone/*
-# export EDITOR=vim-wrapper
+export EDITOR=vim-wrapper
 export PAGER="less -R"
 export LANG=en_GB.UTF-8
 export GCC_COLORS=1
