@@ -12,7 +12,7 @@ alias la='ls -al'
 alias wget='wget --content-disposition'
 
 # abs path so that sudo can use wrapper with a different $PATH
-alias vim=$HOME/.bin/vim-wrapper
+# alias vim=$HOME/.bin/vim-wrapper
 
 # COMMON SHORTCUTS
 alias s='git status'
@@ -22,7 +22,8 @@ alias task="dstask"
 # MISC FIXES
 # make bash/zsh aliases work with sudo
 # http://superuser.com/questions/441556/bash-alias-doesnt-carry-over-with-sudo
-alias sudo="sudo "
+# also share env so sudo has local path etc
+alias sudo="sudo -E"
 
 # The ls alias
 if [[ "$(uname)" == 'Darwin' ]]; then
