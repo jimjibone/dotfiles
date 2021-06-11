@@ -97,4 +97,7 @@ elif grep -q -E 'Ubuntu|Raspbian' /etc/issue; then
     eval `keychain --quiet --eval --agents ssh id_rsa`
 fi
 
+# source any local configuration
+[ -e ~/.zshrc-local ] && source ~/.zshrc-local
+
 trap "~/.bin/cleanup-history.py ~/.history" EXIT
