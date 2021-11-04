@@ -10,16 +10,21 @@ function __git_prompt {
 }
 
 function __p4_prompt {
-	if [ "$P4CLIENT" ]; then
+    if [ "$P4CLIENT" ]; then
         echo -n " ($P4CLIENT)"
+    fi
+}
+
+function __conda_prompt {
+    if [ "$CONDA_DEFAULT_ENV" ] && [ "$CONDA_DEFAULT_ENV" != "base" ]; then
+        echo -n " ($CONDA_DEFAULT_ENV)"
     fi
 }
 
 function __exit_warn {
 	# test status of last command without affecting it
 	st=$?
-	test $st -ne 0 \
-		&& printf "\n\33[31mExited with status %s\33[m" $st
+	test $st -ne 0 && printf "\n\33[31mExited with status %s\33[m" $st
 }
 
 # get new or steal existing tmux

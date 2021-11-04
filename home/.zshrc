@@ -48,7 +48,7 @@ source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 PROMPT="\$(__exit_warn)
-%F{36}\$CMD_TIMER_PROMPT%f%F{${PROMPT_COLOUR}}%n@%M:\$PWD%f%F{243}\$(__git_prompt)\$(__p4_prompt)%f
+%F{36}\$CMD_TIMER_PROMPT%f%F{${PROMPT_COLOUR}}%n@%M:\$PWD%f%F{243}\$(__git_prompt)\$(__p4_prompt)\$(__conda_prompt)%f
 $ "
 
 # if you call a different shell, this does not happen automatically. WTF?
