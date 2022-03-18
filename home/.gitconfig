@@ -3,5 +3,3 @@
 	email = jamesreuss@gmail.com
 [github]
 	user = jimjibone
-[url "git@github.com:"]
-	insteadOf = https://github.com/
