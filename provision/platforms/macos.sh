@@ -18,7 +18,7 @@ fi
 
 # upgrade or install cli things (logic necessary)
 echo "Installing/upgrading brew packages"
-packages=(mosh figlet keychain golang protobuf nodejs tmux)
+packages=(mosh tmux htop figlet keychain golang protobuf nodejs)
 for package in "${packages[@]}"; do
     brew upgrade $package || brew install $package
 done
