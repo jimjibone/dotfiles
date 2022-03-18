@@ -1,5 +1,8 @@
 source ~/.env.sh
 
+# source any local configuration
+[ -e ~/.zshrc-local ] && source ~/.zshrc-local
+
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
@@ -96,8 +99,5 @@ if [ $(uname) == 'Darwin' ]; then
 elif grep -q -E 'Ubuntu|Raspbian' /etc/issue; then
     eval `keychain --quiet --eval --agents ssh id_rsa`
 fi
-
-# source any local configuration
-[ -e ~/.zshrc-local ] && source ~/.zshrc-local
 
 trap "~/.bin/cleanup-history.py ~/.history" EXIT
