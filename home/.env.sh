@@ -2,7 +2,7 @@
 export HOME=~
 export GOPATH=$HOME/go
 export PATH=$HOME/.bin:$GOPATH/bin:$PATH
-export GOPRIVATE=github.com/jimjibone/*
+export GOPRIVATE=github.com/jimjibone
 # export EDITOR=vim-wrapper
 export EDITOR=vim
 export PAGER="less -R"
