@@ -9,6 +9,14 @@ export PAGER="less -R"
 export LANG=en_GB.UTF-8
 export GCC_COLORS=1
 
+if [[ $(uname) == 'Darwin' ]]; then
+    export PATH=$PATH:/opt/homebrew/bin
+elif grep -q Ubuntu /etc/issue; then
+    export PATH=$PATH:/usr/local/go/bin
+elif grep -q Raspbian /etc/issue; then
+    export PATH=$PATH:/usr/local/go/bin
+fi
+
 # Sometimes not set or fully qualified; simple name preferred.
 export HOSTNAME=$(hostname -s)
 export SYSTEM_COLOUR=$($HOME/.bin/system-colour.py $HOSTNAME)
