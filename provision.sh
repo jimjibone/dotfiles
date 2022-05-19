@@ -5,7 +5,7 @@
 # exit on error
 set -Eeo pipefail
 
-if [ $(uname) == 'Darwin' ]; then
+if [[ $(uname) == 'Darwin' ]]; then
     source provision/platforms/all.sh
     source provision/platforms/macos.sh
 elif grep -q Ubuntu /etc/issue; then
