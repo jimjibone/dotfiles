@@ -14,9 +14,9 @@ if [[ $(uname) == 'Darwin' ]]; then
 elif grep -q Debian /etc/issue; then
     export PATH=$PATH:/usr/local/go/bin
 elif grep -q Ubuntu /etc/issue; then
-    export PATH=$PATH:/usr/local/go/bin
+    export PATH=$PATH:/usr/local/go/bin:~/.local/bin
 elif grep -q Raspbian /etc/issue; then
-    export PATH=$PATH:/usr/local/go/bin
+    export PATH=$PATH:/usr/local/go/bin:~/.local/bin
 fi
 
 # Sometimes not set or fully qualified; simple name preferred.

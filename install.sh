@@ -28,6 +28,14 @@ if which conda &>/dev/null; then
 	conda init $(basename $SHELL) &>/dev/null
 fi
 
+# setup terminfo for kitty
+if [ ! -d ~/.terminfo ]; then
+    echo "Setting up terminfo for kitty"
+    mkdir -p ~/.terminfo/{78,x}
+    ln -snf ../x/xterm-kitty ~/.terminfo/78/xterm-kitty
+    tic -x -o ~/.terminfo "$KITTY_INSTALLATION_DIR/terminfo/kitty.terminfo"
+fi
+
 # display the splash
 if which figlet &>/dev/null; then
 	figlet -f slant dotfiles
