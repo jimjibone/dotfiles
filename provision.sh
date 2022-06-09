@@ -11,11 +11,15 @@ if [[ $(uname) == 'Darwin' ]]; then
 elif grep -q Ubuntu /etc/issue; then
     source provision/sudoise.sh
     source provision/platforms/all.sh
-    source provision/platforms/ubuntu.sh
+    source provision/platforms/debian.sh
+elif grep -q Debian /etc/issue; then
+    source provision/sudoise.sh
+    source provision/platforms/all.sh
+    source provision/platforms/debian.sh
 elif grep -q Raspbian /etc/issue; then
     source provision/sudoise.sh
     source provision/platforms/all.sh
-    source provision/platforms/raspbian.sh
+    source provision/platforms/debian.sh
 else
     echo "Unsupported Platform"
     exit 2
