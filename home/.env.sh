@@ -11,6 +11,8 @@ export GCC_COLORS=1
 
 if [[ $(uname) == 'Darwin' ]]; then
     export PATH=$PATH:/opt/homebrew/bin
+elif grep -q Debian /etc/issue; then
+    export PATH=$PATH:/usr/local/go/bin
 elif grep -q Ubuntu /etc/issue; then
     export PATH=$PATH:/usr/local/go/bin
 elif grep -q Raspbian /etc/issue; then
