@@ -25,3 +25,18 @@ Fresh Install
 1. Generate keys: `ssh-keygen -b 4096 -C "$(whoami)@$(hostname -s)"`
 2. Get git: `sudo apt update && sudo apt install git`
 3. Complete the install guide above
+
+
+Misc
+----
+
+1. Disable caps lock on Ubuntu: https://askubuntu.com/questions/351388/how-to-disable-the-caplock
+2. Hide the mouse while typing:
+
+    ````sh
+    sudo apt update && sudo apt install xbanish
+    sudo cp ./home/.config/systemd/user/xbanish.service ~/.config/systemd/user/xbanish.service
+    systemctl reload-units
+    systemctl --user enable xbanish
+    systemctl --user start xbanish
+    ````
