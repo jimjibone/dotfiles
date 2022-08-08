@@ -30,21 +30,23 @@ fi
 
 # add kitty desktop integration
 # see: https://sw.kovidgoyal.net/kitty/binary/
-mkdir -p ~/.local/bin/
-if [ ! -e ~/.local/bin/kitty ]; then
-    ln -s ~/.local/kitty.app/bin/kitty ~/.local/bin/
-    cp ~/.local/kitty.app/share/applications/kitty.desktop ~/.local/share/applications/
-    cp ~/.local/kitty.app/share/applications/kitty-open.desktop ~/.local/share/applications/
-    sed -i "s|Icon=kitty|Icon=/home/$USER/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty*.desktop
-    sed -i "s|Exec=kitty|Exec=/home/$USER/.local/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
-fi
+if [ -e ~/.local/kitty.app ]; then
+    mkdir -p ~/.local/bin/
+    if [ ! -e ~/.local/bin/kitty ]; then
+        ln -s ~/.local/kitty.app/bin/kitty ~/.local/bin/
+        cp ~/.local/kitty.app/share/applications/kitty.desktop ~/.local/share/applications/
+        cp ~/.local/kitty.app/share/applications/kitty-open.desktop ~/.local/share/applications/
+        sed -i "s|Icon=kitty|Icon=/home/$USER/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty*.desktop
+        sed -i "s|Exec=kitty|Exec=/home/$USER/.local/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
+    fi
 
-# setup terminfo for kitty
-if [ ! -d ~/.terminfo ]; then
-    echo "Setting up terminfo for kitty"
-    mkdir -p ~/.terminfo/{78,x}
-    ln -snf ../x/xterm-kitty ~/.terminfo/78/xterm-kitty
-    tic -x -o ~/.terminfo "$KITTY_INSTALLATION_DIR/terminfo/kitty.terminfo"
+    # setup terminfo for kitty
+    if [ ! -d ~/.terminfo ]; then
+        echo "Setting up terminfo for kitty"
+        mkdir -p ~/.terminfo/{78,x}
+        ln -snf ../x/xterm-kitty ~/.terminfo/78/xterm-kitty
+        tic -x -o ~/.terminfo "$KITTY_INSTALLATION_DIR/terminfo/kitty.terminfo"
+    fi
 fi
 
 # display the splash
