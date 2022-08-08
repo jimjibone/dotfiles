@@ -34,3 +34,9 @@ HISTSIZE=5000
 # Change default as unconfigured bash could clobber history. Bash can run
 # unconfigured if CTRL+C is hit during initialisation.
 HISTFILE=~/.history
+
+# Replace kitty's TERM environment variable as it causes issues with so many
+# things.
+if [ -e ~/.local/kitty.app ]; then
+    export TERM=xterm-256color
+fi
