@@ -2,11 +2,17 @@
 set -e
 cd $(dirname $0)
 
+# https://stackoverflow.com/a/5947802/1850206
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
 # destroy old dirs
 # test -d ~/.vim/ && rm -rf ~/.vim/
 # test -d ~/.zsh/ && rm -rf ~/.zsh/
 
 # setup ssh dir and files
+echo -e "${GREEN}Setting up .ssh directory and files${NC}"
 if [ ! -d ~/.ssh ]; then
     mkdir ~/.ssh
     chmod 700 ~/.ssh
@@ -20,6 +26,7 @@ test -f ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
 test -f ~/.ssh/id_rsa.pub && chmod 644 ~/.ssh/id_rsa.pub
 
 # copy dotfiles separately, normal glob does not match
+echo -e "${GREEN}Copying dotfiles${NC}"
 cp -r home/.??* ~ 2> /dev/null
 # cp -a bin ~
 
@@ -29,6 +36,7 @@ vim -c 'PlugInstall' -c 'qa'
 
 # init conda if installed
 if which conda &>/dev/null; then
+    echo -e "${GREEN}Initialising conda${NC}"
 	conda init $(basename $SHELL) &>/dev/null
 fi
 
@@ -37,6 +45,7 @@ fi
 if [ -e ~/.local/kitty.app ]; then
     mkdir -p ~/.local/bin/
     if [ ! -e ~/.local/bin/kitty ]; then
+        echo -e "${GREEN}Setting up kitty shortcuts${NC}"
         ln -s ~/.local/kitty.app/bin/kitty ~/.local/bin/
         cp ~/.local/kitty.app/share/applications/kitty.desktop ~/.local/share/applications/
         cp ~/.local/kitty.app/share/applications/kitty-open.desktop ~/.local/share/applications/
@@ -46,7 +55,7 @@ if [ -e ~/.local/kitty.app ]; then
 
     # setup terminfo for kitty
     if [ ! -d ~/.terminfo ]; then
-        echo "Setting up terminfo for kitty"
+        echo -e "${GREEN}Setting up terminfo for kitty${NC}"
         mkdir -p ~/.terminfo/{78,x}
         ln -snf ../x/xterm-kitty ~/.terminfo/78/xterm-kitty
         tic -x -o ~/.terminfo "$KITTY_INSTALLATION_DIR/terminfo/kitty.terminfo"
@@ -57,10 +66,10 @@ fi
 if which figlet &>/dev/null; then
 	figlet -f slant dotfiles
 fi
-echo Install Complete
+echo -e "${GREEN}Install complete!${NC}"
 
 # print recommendations
 # echo "Add ssh key to your keychain with: ssh-add -K ~/.ssh/id_rsa"
 if [[ $SHELL != *zsh* ]]; then
-    echo "Switch to zsh with: chsh -s \$(which zsh)"
+    echo -e "${RED}Switch to zsh!${NC} chsh -s \$(which zsh)"
 fi
