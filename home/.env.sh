@@ -40,3 +40,6 @@ HISTFILE=~/.history
 if [ -e ~/.local/kitty.app ]; then
     export TERM=xterm-256color
 fi
+
+# Allow git to auto-correct typos.
+git config --global help.autocorrect 20
