@@ -17,9 +17,11 @@ alias wget='wget --content-disposition'
 # COMMON SHORTCUTS
 alias s='git status'
 alias d='git diff --color'
+alias gi='git' # because i can't type `git` properly
 alias gl='git log --oneline --all --graph --decorate --pretty=format:"%C(yellow)%h %ar%C(auto)%d%C(reset) %s %C(blue)%cn"'
 alias gf='git fetch'
 alias gsu='git submodule update --init --recursive'
+alias gc='git commit'
 
 # MISC FIXES
 # make bash/zsh aliases work with sudo
