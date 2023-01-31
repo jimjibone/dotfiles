@@ -1,13 +1,13 @@
 source ~/.env.sh
 
-# source any local configuration
-[ -e ~/.zshrc-local ] && source ~/.zshrc-local
-
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
 source ~/.functions.sh
 source ~/.aliases
+
+# source any local configuration
+[ -e ~/.zshrc-local ] && source ~/.zshrc-local
 
 SAVEHIST=$HISTSIZE
 unsetopt EXTENDED_HISTORY # just a list of commands so bash_history is compatible
