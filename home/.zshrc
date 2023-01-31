@@ -93,10 +93,10 @@ fc -R # reload history
 
 # _tmux_window_name_read
 
-if [ $(uname) == 'Darwin' ]; then
-    eval `keychain --quiet --eval --agents ssh --inherit any id_rsa`
-elif grep -q -E 'Ubuntu|Raspbian' /etc/issue; then
-    eval `keychain --quiet --eval --agents ssh id_rsa`
-fi
+# if [ $(uname) == 'Darwin' ]; then
+#     eval `keychain --quiet --eval --agents ssh --inherit any id_rsa`
+# elif grep -q -E 'Ubuntu|Raspbian' /etc/issue; then
+#     eval `keychain --quiet --eval --agents ssh id_rsa`
+# fi
 
 trap "~/.bin/cleanup-history.py ~/.history" EXIT
