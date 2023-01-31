@@ -9,15 +9,15 @@ if [[ $(uname) == 'Darwin' ]]; then
     source provision/platforms/all.sh
     source provision/platforms/macos.sh
 elif grep -q Ubuntu /etc/issue; then
-    source provision/sudoise.sh
+    #source provision/sudoise.sh
     source provision/platforms/all.sh
     source provision/platforms/debian.sh
 elif grep -q Debian /etc/issue; then
-    source provision/sudoise.sh
+    #source provision/sudoise.sh
     source provision/platforms/all.sh
     source provision/platforms/debian.sh
 elif grep -q Raspbian /etc/issue; then
-    source provision/sudoise.sh
+    #source provision/sudoise.sh
     source provision/platforms/all.sh
     source provision/platforms/debian.sh
 else
