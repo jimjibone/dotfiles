@@ -35,8 +35,7 @@ Misc
 
     ````sh
     sudo apt update && sudo apt install xbanish
-    sudo cp ./home/.config/systemd/user/xbanish.service ~/.config/systemd/user/xbanish.service
-    systemctl reload-units
-    systemctl --user enable xbanish
-    systemctl --user start xbanish
+    cp ./home/.config/systemd/user/xbanish.service ~/.config/systemd/user/xbanish.service
+    systemctl --user daemon-reload
+    systemctl --user enable --now xbanish.service
     ````
