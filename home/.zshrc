@@ -29,7 +29,7 @@ bindkey -e
 
 # Completion
 autoload -U compinit && compinit
-source ~/.zsh/woodhouse-zsh-completions.sh
+# source ~/.zsh/woodhouse-zsh-completions.sh
 compdef d=git
 
 # zsh-git-prompt
@@ -44,6 +44,10 @@ source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # history search by substring - must be loaded after syntax highlighting
 # https://github.com/zsh-users/zsh-history-substring-search
 source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+# fast/unobtrusive autosuggestions for zsh.
+# https://github.com/zsh-users/zsh-autosuggestions
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # case insensitive completion
 # http://stackoverflow.com/questions/24226685/have-zsh-return-case-insensitive-auto-complete-matches-but-prefer-exact-matches

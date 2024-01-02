@@ -32,3 +32,14 @@ else
     git pull
     popd
 fi
+
+# zsh-autosuggestions
+if [ ! -d ~/.zsh/zsh-autosuggestions ]; then
+    echo "Cloning zsh-autosuggestions"
+    git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.zsh/zsh-autosuggestions
+else
+    echo "Updating zsh-autosuggestions"
+    pushd ~/.zsh/zsh-autosuggestions
+    git pull
+    popd
+fi
