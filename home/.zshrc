@@ -6,9 +6,6 @@ source ~/.env.sh
 source ~/.aliases
 source ~/.functions.sh
 
-# source any local configuration
-[ -e ~/.zshrc-local ] && source ~/.zshrc-local
-
 SAVEHIST=$HISTSIZE
 unsetopt EXTENDED_HISTORY # just a list of commands so bash_history is compatible
 setopt INC_APPEND_HISTORY # immediate sharing of history
@@ -96,6 +93,9 @@ _disable_flow_control
 fc -R # reload history
 
 # _tmux_window_name_read
+
+# source any local configuration
+[ -e ~/.zshrc-local ] && source ~/.zshrc-local
 
 # if [ $(uname) == 'Darwin' ]; then
 #     eval `keychain --quiet --eval --agents ssh --inherit any id_rsa`
