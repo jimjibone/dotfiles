@@ -22,7 +22,7 @@ Fresh Install
 
 ## Debian (Buster)
 
-1. Generate keys: `ssh-keygen -b 4096 -C "$(whoami)@$(hostname -s)"`
+1. Generate keys: `ssh-keygen -t ed25519 -C "$(whoami)@$(hostname -s)"`
 2. Get git: `sudo apt update && sudo apt install git`
 3. Complete the install guide above
 
