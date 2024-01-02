@@ -62,6 +62,9 @@ if [ -e ~/.local/kitty.app ]; then
     fi
 fi
 
+# it's ok if things fail now
+set -e
+
 # display the splash
 if which figlet &>/dev/null; then
     figlet -f slant dotfiles
