@@ -30,14 +30,14 @@ echo -e "${GREEN}Copying dotfiles${NC}"
 cp -r home/.??* ~ 2> /dev/null
 # cp -a bin ~
 
-# install vim plugins
-echo -e "${GREEN}Installing vim plugins${NC}"
-vim -c 'PlugInstall' -c 'qa'
+# install vim plugins - archived, now using nvim
+# echo -e "${GREEN}Installing vim plugins${NC}"
+# vim -c 'PlugInstall' -c 'qa'
 
 # init conda if installed
 if which conda &>/dev/null; then
     echo -e "${GREEN}Initialising conda${NC}"
-	conda init $(basename $SHELL) &>/dev/null
+    conda init $(basename $SHELL) &>/dev/null
 fi
 
 # add kitty desktop integration
@@ -64,7 +64,7 @@ fi
 
 # display the splash
 if which figlet &>/dev/null; then
-	figlet -f slant dotfiles
+    figlet -f slant dotfiles
 fi
 echo -e "${GREEN}Install complete!${NC}"
 
