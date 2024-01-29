@@ -24,8 +24,8 @@ alias gsu='git submodule update --init --recursive'
 alias gc='git commit'
 
 # BLEEDING FAST STUFF
-alias cz="find ~/repos -mindepth 3 -maxdepth 3 -type d -not -path '*/\.*' | fzf --print0 | xargs -0 code"
-alias nz="find ~/repos -mindepth 3 -maxdepth 3 -type d -not -path '*/\.*' | fzf --print0 | xargs -0 nvim"
+alias cz="find ~/repos -mindepth 0 -maxdepth 3 -type d -not -path '*/\.*' | fzf --print0 | xargs -0 code"
+alias nz="find ~/repos -mindepth 0 -maxdepth 3 -type d -not -path '*/\.*' | fzf --print0 | xargs -0 nvim"
 
 # MISC FIXES
 # make bash/zsh aliases work with sudo
