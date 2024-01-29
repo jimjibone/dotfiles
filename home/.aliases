@@ -23,6 +23,10 @@ alias gf='git fetch'
 alias gsu='git submodule update --init --recursive'
 alias gc='git commit'
 
+# BLEEDING FAST STUFF
+alias cz="find ~/repos -mindepth 3 -maxdepth 3 -type d -not -path '*/\.*' | fzf --print0 | xargs -0 code"
+alias nz="find ~/repos -mindepth 3 -maxdepth 3 -type d -not -path '*/\.*' | fzf --print0 | xargs -0 nvim"
+
 # MISC FIXES
 # make bash/zsh aliases work with sudo
 # http://superuser.com/questions/441556/bash-alias-doesnt-carry-over-with-sudo
