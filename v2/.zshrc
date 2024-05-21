@@ -95,11 +95,22 @@ alias gc='git commit'
 alias gsu='git submodule update --init --recursive'
 alias gl='git log --oneline --all --graph --decorate --pretty=format:"%C(yellow)%h %ar%C(auto)%d%C(reset) %s %C(blue)%cn"'
 
+# Alias functions
+# get new or steal existing tmux
+function tm {
+	# must not already be inside tmux
+	test ! "$TMUX" || return
+	# detach any other clients
+	# attach or make new if there isn't one
+	tmux attach -d || tmux
+}
+
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 
 # Common static env
+export HOSTNAME=$(hostname -s) # Sometimes not set or fully qualified; simple name preferred.
 export HOME=~
 export GOPATH=$HOME/go
 export PATH=$HOME/.bin:$GOPATH/bin:$PATH
