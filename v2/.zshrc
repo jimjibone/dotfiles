@@ -93,6 +93,7 @@ alias gf='git fetch'
 alias s='git status'
 alias gc='git commit'
 alias gsu='git submodule update --init --recursive'
+alias gl='git log --oneline --all --graph --decorate --pretty=format:"%C(yellow)%h %ar%C(auto)%d%C(reset) %s %C(blue)%cn"'
 
 # Shell integrations
 eval "$(fzf --zsh)"
