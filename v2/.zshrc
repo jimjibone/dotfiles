@@ -105,6 +105,9 @@ function tm {
 	tmux attach -d || tmux
 }
 
+# Source fzf git installations
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
