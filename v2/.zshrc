@@ -117,5 +117,8 @@ export PATH=$HOME/.bin:$GOPATH/bin:$PATH
 export GOPRIVATE=github.com/jimjibone
 export EDITOR=nvim
 
-# Allow git to auto-correct typos.
+# Allow git to auto-correct typos
 git config --global help.autocorrect 10
+
+# Source any local configuration
+[ -e ~/.zshrc-local ] && source ~/.zshrc-local
