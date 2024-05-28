@@ -55,8 +55,9 @@ zinit cdreplay -q
 
 # Keybindings
 # bindkey -e
-bindkey '^p' history-search-backward
-bindkey '^n' history-search-forward
+# 'history-search-*' both methods are necessary
+bindkey "$terminfo[kcuu1]" history-search-backward
+bindkey "$terminfo[kcud1]" history-search-forward
 bindkey '^[[A' history-search-backward
 bindkey '^[[B' history-search-forward
 # bindkey '^[w' kill-region
