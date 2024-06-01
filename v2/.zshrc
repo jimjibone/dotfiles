@@ -109,20 +109,21 @@ function tm {
 # Source fzf git installations
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# Shell integrations
-eval "$(fzf --zsh)"
-eval "$(zoxide init --cmd cd zsh)"
-
 # Common static env
 export HOSTNAME=$(hostname -s) # Sometimes not set or fully qualified; simple name preferred.
 export HOME=~
 export GOPATH=$HOME/go
-export PATH=$HOME/.bin:$GOPATH/bin:$PATH
+export PATH=$HOME/.bin:$HOME/.local/bin:$GOPATH/bin:$PATH
 export GOPRIVATE=github.com/jimjibone
 export EDITOR=nvim
+
+# Shell integrations
+eval "$(fzf --zsh)"
+eval "$(zoxide init --cmd cd zsh)"
 
 # Allow git to auto-correct typos
 git config --global help.autocorrect 10
 
 # Source any local configuration
 [ -e ~/.zshrc-local ] && source ~/.zshrc-local
+
