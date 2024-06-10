@@ -8,16 +8,18 @@ local config = wezterm.config_builder()
 --local darkTheme = "Campbell (Gogh)"
 local darkTheme = "Hardcore"
 local lightTheme = "Catppuccin Latte (Gogh)"
+--local lightTheme = "Github Light (Gogh)"
 config.color_scheme = darkTheme
 
 -- Condfigure window
 config.use_fancy_tab_bar = false
+config.hide_tab_bar_if_only_one_tab = true
 config.window_decorations = "RESIZE" -- remove title bar
 config.window_padding = {
 	left = "0.2cell",
 	right = "0.2cell",
-	top = "0.0cell",
-	bottom = "0.0cell",
+	top = "0.1cell",
+	bottom = "0.1cell",
 }
 
 -- Toggle theme function - activated via keybindings
