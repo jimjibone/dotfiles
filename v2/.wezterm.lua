@@ -4,14 +4,15 @@ local wezterm = require("wezterm")
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
--- This is where you actually apply your config choices
-
--- For example, changing the color scheme:
-local darkTheme = "Campbell (Gogh)"
-local lightTheme = "Catppuccin Latte"
+-- Colour schemes
+--local darkTheme = "Campbell (Gogh)"
+local darkTheme = "Hardcore"
+local lightTheme = "Catppuccin Latte (Gogh)"
 config.color_scheme = darkTheme
-config.use_fancy_tab_bar = false
 
+-- Condfigure window
+config.use_fancy_tab_bar = false
+config.window_decorations = "RESIZE" -- remove title bar
 config.window_padding = {
 	left = "0.2cell",
 	right = "0.2cell",
@@ -19,6 +20,7 @@ config.window_padding = {
 	bottom = "0.0cell",
 }
 
+-- Toggle theme function - activated via keybindings
 local function toggleTheme(key, dt, lt)
 	return wezterm.action_callback(function(window, pane)
 		local o = window:get_config_overrides() or {}
@@ -31,9 +33,15 @@ local function toggleTheme(key, dt, lt)
 	end)
 end
 
+-- Keybindings
+local act = wezterm.action
 config.keys = {
 	-- Toggle between dark and light theme
 	{ key = "t", mods = "ALT", action = toggleTheme("color_scheme", darkTheme, lightTheme) },
+
+	-- Switch tabs
+	{ key = "LeftArrow", mods = "SHIFT|CTRL", action = act.ActivateTabRelative(-1) },
+	{ key = "RightArrow", mods = "SHIFT|CTRL", action = act.ActivateTabRelative(1) },
 }
 
 -- and finally, return the configuration to wezterm
