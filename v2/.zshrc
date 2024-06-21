@@ -29,7 +29,7 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
-#zinit light zsh-users/zsh-history-substring-search
+zinit light zsh-users/zsh-history-substring-search
 zinit light Aloxaf/fzf-tab
 
 # Add in snippets
@@ -56,14 +56,16 @@ zinit cdreplay -q
 # Keybindings
 # bindkey -e
 # 'history-search-*' both methods are necessary
-bindkey "$terminfo[kcuu1]" history-search-backward
-bindkey "$terminfo[kcud1]" history-search-forward
-bindkey '^[[A' history-search-backward
-bindkey '^[[B' history-search-forward
+# bindkey "$terminfo[kcuu1]" history-search-backward
+# bindkey "$terminfo[kcud1]" history-search-forward
+# bindkey '^[[A' history-search-backward
+# bindkey '^[[B' history-search-forward
+# substring search is superior
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 # bindkey '^[w' kill-region
-
-#bindkey "$terminfo[kcuu1]" history-substring-search-up
-#bindkey "$terminfo[kcud1]" history-substring-search-down
 
 # History
 HISTSIZE=5000
