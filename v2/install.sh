@@ -31,6 +31,7 @@ echo -e "${GREEN}Copying dotfiles${NC}"
 #cp -r home/.??* ~ 2> /dev/null
 cp .zshrc ~ 2>/dev/null
 cp .p10k.zsh ~ 2>/dev/null
+cp .wezterm.lua ~ 2>/dev/null
 # cp -a bin ~
 
 # install vim plugins - archived, now using nvim
