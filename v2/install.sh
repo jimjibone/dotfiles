@@ -8,12 +8,19 @@ RED='\033[0;31m'
 GREY='\033[0;90m'
 NC='\033[0m' # No Color
 
+# display the splash
+if which figlet &>/dev/null; then
+	figlet -f slant dotfiles
+else
+	echo -e ${GREY}"installing dotfiles...${NC}"
+fi
+
 # destroy old dirs
 # test -d ~/.vim/ && rm -rf ~/.vim/
 # test -d ~/.zsh/ && rm -rf ~/.zsh/
 
 # setup ssh dir and files
-echo -e "${GREEN}Setting up .ssh directory and files${NC}"
+echo -e "${GREEN}setting up .ssh directory and files${NC}"
 if [ ! -d ~/.ssh ]; then
 	mkdir ~/.ssh
 	chmod 700 ~/.ssh
@@ -27,27 +34,25 @@ test -f ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
 test -f ~/.ssh/id_rsa.pub && chmod 644 ~/.ssh/id_rsa.pub
 
 # copy dotfiles separately, normal glob does not match
-echo -e "${GREEN}Copying dotfiles${NC}"
+echo -e "${GREEN}copying dotfiles${NC}"
 #cp -r home/.??* ~ 2> /dev/null
-cp .zshrc ~ 2>/dev/null
-cp .p10k.zsh ~ 2>/dev/null
-cp .wezterm.lua ~ 2>/dev/null
-# cp -a bin ~
+cp .zshrc ~/
+cp .p10k.zsh ~/
+cp .wezterm.lua ~/
+mkdir -p ~/.config/systemd/user
+cp .config/systemd/user/* ~/.config/systemd/user/
+
+# refresh systemd
+echo -e "${GREEN}refreshing systemd${NC}"
+systemctl --user daemon-reload
+systemctl --user enable --now xbanish.service
 
 # install vim plugins - archived, now using nvim
 # echo -e "${GREEN}Installing vim plugins${NC}"
 # vim -c 'PlugInstall' -c 'qa'
 
-# it's ok if things fail now
-set -e
-
-# display the splash
-if which figlet &>/dev/null; then
-	figlet -f slant dotfiles
-else
-	echo -e ${GREY}"figlet missing${NC}"
-fi
-echo -e "${GREEN}Install complete!${NC}"
+# all done
+echo -e "${GREEN}install complete!${NC}"
 
 # print recommendations
 # echo "Add ssh key to your keychain with: ssh-add -K ~/.ssh/id_rsa"
