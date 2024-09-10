@@ -54,18 +54,15 @@ zinit cdreplay -q
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Keybindings
-# bindkey -e
-# 'history-search-*' both methods are necessary
-# bindkey "$terminfo[kcuu1]" history-search-backward
-# bindkey "$terminfo[kcud1]" history-search-forward
-# bindkey '^[[A' history-search-backward
-# bindkey '^[[B' history-search-forward
 # substring search is superior
 bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
-# bindkey '^[w' kill-region
+# fix special keys
+bindkey "^[[H"  beginning-of-line # fix home going to start of line
+bindkey "^[[F"  end-of-line # fix end gonig to end of line
+bindkey "^[[3~" delete-char # fix delete key doing delete
 
 # History
 HISTSIZE=5000
@@ -130,3 +127,5 @@ git config --global help.autocorrect 10
 # Source any local configuration
 [ -e ~/.zshrc-local ] && source ~/.zshrc-local
 
+# Enable starship
+#eval "$(starship init zsh)"
