@@ -121,6 +121,13 @@ export EDITOR=nvim
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 
+# Custom cd (utilising zoxide)
+function cd() {
+  __zoxide_z "$@" && pwd && eza
+}
+alias ls='eza'
+alias la='eza -alh'
+
 # Allow git to auto-correct typos
 git config --global help.autocorrect 10
 
