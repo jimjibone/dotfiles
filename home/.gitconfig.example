@@ -1,7 +1,0 @@
-[user]
-	name = James Reuss
-	email = jamesreuss@gmail.com
-[github]
-	user = jimjibone
-[url "ssh://git@github.com/jimjibone"]
-	insteadOf = https://github.com/jimjibone
