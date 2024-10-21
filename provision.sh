@@ -42,11 +42,14 @@ if [[ $(uname) == 'Darwin' ]]; then
 	echo -e "${BLUE}platform:${NC} macos"
 
 	PACKAGES=""
-	if yes_or_no "install figlet?"; then
+	if yes_or_no "install figlet (fancy text)?"; then
 		PACKAGES="$PACKAGES figlet"
 	fi
-	if yes_or_no "install starship?"; then
+	if yes_or_no "install starship (improved prompt)?"; then
 		PACKAGES="$PACKAGES starship"
+	fi
+	if yes_or_no "install eza (ls replacement)?"; then
+		PACKAGES="$PACKAGES eza"
 	fi
 
 	if [ ! -z "$PACKAGES" ]; then
