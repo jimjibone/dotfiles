@@ -20,7 +20,7 @@ set -Eeo pipefail
 
 # display the splash
 if which figlet &>/dev/null; then
-	figlet -f slant dotfiles
+	figlet -f slant dotfiles v2
 fi
 echo -e ${BLUE}"provisioning system...${NC}"
 

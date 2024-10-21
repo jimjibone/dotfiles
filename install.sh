@@ -11,7 +11,7 @@ NC='\033[0m' # No Color
 
 # display the splash
 if which figlet &>/dev/null; then
-	figlet -f slant dotfiles
+	figlet -f slant dotfiles v2
 fi
 echo -e ${BLUE}"installing...${NC}"
 
@@ -40,20 +40,32 @@ cp .p10k.zsh ~/
 cp .tmux.conf ~/
 cp .wezterm.lua ~/
 cp .zshrc ~/
-mkdir -p ~/.config/systemd/user
-cp .config/systemd/user/* ~/.config/systemd/user/
+mkdir -p ~/.config
 cp .config/starship.toml ~/.config/
 
-# refresh systemd
-echo -e "${BLUE}refreshing systemd${NC}"
-systemctl --user daemon-reload
-systemctl --user enable --now xbanish.service
+if [[ $(uname) == 'Darwin' ]]; then
+	echo -e "${BLUE}platform:${NC} macos"
+	echo -e "${GREY}skipping systemd config${NC}"
+# elif grep -q Ubuntu /etc/issue; then
+# 	echo -e "${BLUE}platform:${NC} macos"
+#	# copy systemd services
+#	mkdir -p ~/.config/systemd/user
+#	cp .config/systemd/user/* ~/.config/systemd/user/
+#	# refresh systemd
+#	echo -e "${BLUE}refreshing systemd${NC}"
+#	systemctl --user daemon-reload
+#	systemctl --user enable --now xbanish.service
+# elif grep -q Debian /etc/issue; then
+# elif grep -q Raspbian /etc/issue; then
+else
+	echo -e "${RED}unsupported platform!${NC}"
+	exit 2
+fi
 
 # all done
 echo -e "${GREEN}install complete!${NC}"
 
 # print recommendations
-# echo "Add ssh key to your keychain with: ssh-add -K ~/.ssh/id_rsa"
 if [[ $SHELL != *zsh* ]]; then
 	echo -e "${RED}Switch to zsh!${NC} chsh -s \$(which zsh)"
 fi
