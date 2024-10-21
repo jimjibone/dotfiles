@@ -56,6 +56,8 @@ if [[ $(uname) == 'Darwin' ]]; then
 		(echo -en ${GREY}; set -x; brew install $PACKAGES); echo -en ${NC}
 	fi
 
+elif grep -q Fedora /etc/os-release; then
+	echo -e "${BLUE}platform:${NC} fedora"
 # elif grep -q Ubuntu /etc/issue; then
 # elif grep -q Debian /etc/issue; then
 # elif grep -q Raspbian /etc/issue; then
