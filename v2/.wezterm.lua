@@ -38,6 +38,19 @@ end
 
 -- Keybindings
 local act = wezterm.action
+config.mouse_bindings = {
+	-- Change mouse scroll amount
+	{
+		event = { Down = { streak = 1, button = { WheelUp = 1 } } },
+		mods = "NONE",
+		action = act.ScrollByLine(-3),
+	},
+	{
+		event = { Down = { streak = 1, button = { WheelDown = 1 } } },
+		mods = "NONE",
+		action = act.ScrollByLine(3),
+	},
+}
 config.keys = {
 	-- Toggle between dark and light theme
 	{ key = "t", mods = "ALT", action = toggleTheme("color_scheme", darkTheme, lightTheme) },
