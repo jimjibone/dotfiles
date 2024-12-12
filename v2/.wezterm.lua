@@ -44,6 +44,10 @@ config.keys = {
 	-- Switch tabs
 	{ key = "LeftArrow", mods = "SHIFT|CTRL", action = act.ActivateTabRelative(-1) },
 	{ key = "RightArrow", mods = "SHIFT|CTRL", action = act.ActivateTabRelative(1) },
+
+	-- Fix Home/End keys
+	--{ key = "Home", mods = "", action = wezterm.action({ SendString = "\001" }) },
+	--{ key = "End", mods = "", action = wezterm.action({ SendString = "\005" }) },
 }
 
 -- and finally, return the configuration to wezterm
