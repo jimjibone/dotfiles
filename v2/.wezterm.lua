@@ -10,6 +10,7 @@ local darkTheme = "Hardcore"
 local lightTheme = "Catppuccin Latte (Gogh)"
 --local lightTheme = "Github Light (Gogh)"
 config.color_scheme = darkTheme
+config.font_size = 10
 
 -- Condfigure window
 config.use_fancy_tab_bar = false
