@@ -113,7 +113,7 @@ function cd() {
 	__zoxide_z "$@" && pwd && eza
 }
 alias ls='eza'
-alias la='eza -aglh'
+alias la='eza -aaglh'
 
 # Allow git to auto-correct typos
 git config --global help.autocorrect 10
