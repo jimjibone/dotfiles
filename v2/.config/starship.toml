@@ -31,4 +31,4 @@ format = '[$symbol$branch(:$remote_branch)]($style) '
 
 [cmd_duration]
 show_milliseconds = true
-show_notifications = true
+show_notifications = false
