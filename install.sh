@@ -46,15 +46,18 @@ cp .config/starship.toml ~/.config/
 if [[ $(uname) == 'Darwin' ]]; then
 	echo -e "${BLUE}platform:${NC} macos"
 	echo -e "${GREY}skipping systemd config${NC}"
+
+elif grep -q Fedora /etc/os-release; then
+	echo -e "${BLUE}platform:${NC} fedora"
+	# copy systemd services
+	mkdir -p ~/.config/systemd/user
+	cp .config/systemd/user/* ~/.config/systemd/user/
+	# refresh systemd
+	echo -e "${BLUE}refreshing systemd${NC}"
+	systemctl --user daemon-reload
+	systemctl --user enable --now xbanish.service
+
 # elif grep -q Ubuntu /etc/issue; then
-# 	echo -e "${BLUE}platform:${NC} macos"
-#	# copy systemd services
-#	mkdir -p ~/.config/systemd/user
-#	cp .config/systemd/user/* ~/.config/systemd/user/
-#	# refresh systemd
-#	echo -e "${BLUE}refreshing systemd${NC}"
-#	systemctl --user daemon-reload
-#	systemctl --user enable --now xbanish.service
 # elif grep -q Debian /etc/issue; then
 # elif grep -q Raspbian /etc/issue; then
 else
