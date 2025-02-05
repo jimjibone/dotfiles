@@ -58,6 +58,35 @@ if [[ $(uname) == 'Darwin' ]]; then
 
 elif grep -q Fedora /etc/os-release; then
 	echo -e "${BLUE}platform:${NC} fedora"
+
+	PACKAGES=""
+	DO_STARSHIP=0
+	if yes_or_no "install figlet (fancy text)?"; then
+		PACKAGES="$PACKAGES figlet"
+	fi
+	if yes_or_no "install starship (improved prompt)?"; then
+		DO_STARSHIP=1
+	fi
+	if yes_or_no "install zsh (better shell)?"; then
+		PACKAGES="$PACKAGES zsh"
+	fi
+	if yes_or_no "install eza (ls replacement)?"; then
+		PACKAGES="$PACKAGES eza"
+	fi
+	if yes_or_no "install fzf (fuzzy search)?"; then
+		PACKAGES="$PACKAGES fzf"
+	fi
+	if yes_or_no "install zoxide (better cd)?"; then
+		PACKAGES="$PACKAGES zoxide"
+	fi
+
+	if [ ! -z "$PACKAGES" ]; then
+		(echo -en ${GREY}; set -x; sudo dnf install $PACKAGES); echo -en ${NC}
+	fi
+	if [ $DO_STARSHIP -eq 1 ]; then
+		curl -sS https://starship.rs/install.sh | sh
+	fi
+
 # elif grep -q Ubuntu /etc/issue; then
 # elif grep -q Debian /etc/issue; then
 # elif grep -q Raspbian /etc/issue; then
