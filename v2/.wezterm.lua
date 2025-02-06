@@ -6,8 +6,10 @@ local config = wezterm.config_builder()
 
 -- Colour schemes
 --local darkTheme = "Campbell (Gogh)"
-local darkTheme = "Hardcore"
-local lightTheme = "Catppuccin Latte (Gogh)"
+--local darkTheme = "Hardcore"
+local darkTheme = "Rosé Pine (Gogh)"
+--local lightTheme = "Catppuccin Latte (Gogh)"
+local lightTheme = "Rosé Pine Dawn (Gogh)"
 --local lightTheme = "Github Light (Gogh)"
 config.color_scheme = darkTheme
 config.font_size = 10
