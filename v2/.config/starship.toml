@@ -7,6 +7,7 @@ $directory\
 $git_branch\
 $git_state\
 $git_status\
+$status\
 $cmd_duration\
 $line_break\
 $python\
@@ -28,6 +29,12 @@ truncate_to_repo = false
 
 [git_branch]
 format = '[$symbol$branch(:$remote_branch)]($style) '
+
+[status]
+# style = 'bg:red'
+format = '[\[$status $symbol$common_meaning$signal_name\]]($style) '
+map_symbol = true
+disabled = false
 
 [cmd_duration]
 show_milliseconds = true
