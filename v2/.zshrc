@@ -82,6 +82,8 @@ alias gc='git commit'
 alias gsu='git submodule update --init --recursive'
 alias gl='git log --oneline --all --graph --decorate --pretty=format:"%C(yellow)%h %ar%C(auto)%d%C(reset) %s %C(blue)%cn"'
 alias lg='lazygit'
+alias 'c.'='code .'
+alias dc='docker compose'
 
 # Alias functions
 # get new or steal existing tmux
