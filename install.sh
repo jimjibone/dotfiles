@@ -57,9 +57,10 @@ elif grep -q Fedora /etc/os-release; then
 	systemctl --user daemon-reload
 	systemctl --user enable --now xbanish.service
 
-# elif grep -q Ubuntu /etc/issue; then
-# elif grep -q Debian /etc/issue; then
-# elif grep -q Raspbian /etc/issue; then
+elif grep -q Debian /etc/issue; then
+	echo -e "${BLUE}platform:${NC} debian"
+	echo -e "${GREY}skipping systemd config${NC}"
+
 else
 	echo -e "${RED}unsupported platform!${NC}"
 	exit 2

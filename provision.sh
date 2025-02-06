@@ -32,8 +32,8 @@ function yes_or_no {
 		read -p "$* [y/n]: " yn
 		echo -en ${NC}
 		case $yn in
-			[Yy]*) return 0 ;;
-			[Nn]*) return 1 ;;
+		[Yy]*) return 0 ;;
+		[Nn]*) return 1 ;;
 		esac
 	done
 }
@@ -53,7 +53,12 @@ if [[ $(uname) == 'Darwin' ]]; then
 	fi
 
 	if [ ! -z "$PACKAGES" ]; then
-		(echo -en ${GREY}; set -x; brew install $PACKAGES); echo -en ${NC}
+		(
+			echo -en ${GREY}
+			set -x
+			brew install $PACKAGES
+		)
+		echo -en ${NC}
 	fi
 
 elif grep -q Fedora /etc/os-release; then
@@ -81,15 +86,52 @@ elif grep -q Fedora /etc/os-release; then
 	fi
 
 	if [ ! -z "$PACKAGES" ]; then
-		(echo -en ${GREY}; set -x; sudo dnf install $PACKAGES); echo -en ${NC}
+		(
+			echo -en ${GREY}
+			set -x
+			sudo dnf install $PACKAGES
+		)
+		echo -en ${NC}
 	fi
 	if [ $DO_STARSHIP -eq 1 ]; then
 		curl -sS https://starship.rs/install.sh | sh
 	fi
 
-# elif grep -q Ubuntu /etc/issue; then
-# elif grep -q Debian /etc/issue; then
-# elif grep -q Raspbian /etc/issue; then
+elif grep -q Debian /etc/issue; then
+	echo -e "${BLUE}platform:${NC} debian"
+
+	PACKAGES=""
+	DO_STARSHIP=0
+	if yes_or_no "install figlet (fancy text)?"; then
+		PACKAGES="$PACKAGES figlet"
+	fi
+	if yes_or_no "install starship (improved prompt)?"; then
+		DO_STARSHIP=1
+	fi
+	if yes_or_no "install zsh (better shell)?"; then
+		PACKAGES="$PACKAGES zsh"
+	fi
+	if yes_or_no "install eza (ls replacement)?"; then
+		PACKAGES="$PACKAGES eza"
+	fi
+	if yes_or_no "install fzf (fuzzy search)?"; then
+		PACKAGES="$PACKAGES fzf"
+	fi
+	if yes_or_no "install zoxide (better cd)?"; then
+		PACKAGES="$PACKAGES zoxide"
+	fi
+
+	if [ ! -z "$PACKAGES" ]; then
+		(
+			echo -en ${GREY}
+			set -x
+			sudo apt-get update && sudo apt-get install -y $PACKAGES
+		)
+		echo -en ${NC}
+	fi
+	if [ $DO_STARSHIP -eq 1 ]; then
+		curl -sS https://starship.rs/install.sh | sh
+	fi
 else
 	echo -e "${RED}unsupported platform!${NC}"
 	exit 2
