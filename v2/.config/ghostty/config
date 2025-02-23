@@ -1,0 +1,6 @@
+theme = rose-pine
+
+mouse-hide-while-typing=true
+
+keybind = ctrl+shift+left=previous_tab
+keybind = ctrl+shift+right=next_tab
